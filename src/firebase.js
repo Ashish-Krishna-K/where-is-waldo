@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAWWFT6N07E_oO20gElk5tpS1rZCE0BiAk",
@@ -13,9 +13,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export default async function getTargetCoordinates() {
-    const data = await getDocs(collection(db, "baseData"));
-    const dataArr = []
-    data.forEach(item => dataArr.push(item.data()));
-    return dataArr;
+export default async function getTargetCoordinates(name) {
+  const data = await getDoc(doc(db, "target", name));
+  return data.data();
 }

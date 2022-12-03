@@ -32,6 +32,22 @@ img.waldo-image {
     transform: translateX(-50%) translateY(-50%);
 }
 
+.correct{
+    border: 5px solid greenyellow;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    transform: translateX(-50%) translateY(-50%);
+}
+
 #container {
     position: relative;
+}
+
+#options {
+    position: absolute;
+    transform: translateX(-50%) translateY(20%);
+
+    display: flex;
+    flex-direction: column;
 }

@@ -1,7 +1,4 @@
-import React, { useState } from "react";
-
-export function Timer() {
-    const [time, setTime] = useState(new Date(null).toISOString());
+export function Timer({ time, setTime }) {
 
     setTimeout(() => {
         const date = new Date(time);
