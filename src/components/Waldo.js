@@ -6,11 +6,24 @@ export function Waldo() {
         left: null,
         top: null,
     })
+    const [range, setRange] = useState({
+        leftMin: null,
+        leftMax: null,
+        topMin: null,
+        topMax: null
+    })
 
     const handleClick = (e) => {
+        console.log(e.nativeEvent.offsetX)
         setCoordinates({
             left: e.nativeEvent.offsetX,
             top: e.nativeEvent.offsetY,
+        });
+        setRange({
+            leftMin: e.nativeEvent.offsetX - 15,
+            leftMax: e.nativeEvent.offsetX + 15,
+            topMin: e.nativeEvent.offsetY - 15,
+            topMax: e.nativeEvent.offsetY + 15,
         })
     };
 
