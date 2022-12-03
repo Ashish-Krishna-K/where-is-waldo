@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAWWFT6N07E_oO20gElk5tpS1rZCE0BiAk",
@@ -13,7 +13,31 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export default async function getTargetCoordinates(name) {
+export async function getTargetCoordinates(name) {
   const data = await getDoc(doc(db, "target", name));
   return data.data();
+}
+
+export async function getCurrentLeaderBoard() {
+  const imports = await getDoc(doc(db, "highScores", "highScores"));
+  return imports.data();
+}
+
+export async function submitScoresToLeaderBoard(highScore, leaderboard) {
+  const scores = []
+  if(leaderboard.scores === null) {
+    scores.push(highScore)
+    await setDoc(doc(db, "highScores", "highScores"), {
+      title: 'LeaderBoard',
+      scores: [...scores],
+    })
+    return;  
+  }
+  leaderboard.scores.forEach(item => scores.push(item));
+  scores.push(highScore)
+
+  await setDoc(doc(db, "highScores", "highScores"), {
+    title: 'LeaderBoard',
+    scores: [...scores],
+  })
 }
