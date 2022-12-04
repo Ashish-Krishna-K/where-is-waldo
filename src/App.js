@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Timer } from "./components/Timer";
 import { Waldo } from "./components/Waldo";
 import { SubmitScore } from "./components/SubmitScore";
-import {getTargetCoordinates, submitScoresToLeaderBoard, getCurrentLeaderBoard} from "./firebase";
+import { getTargetCoordinates, submitScoresToLeaderBoard, getCurrentLeaderBoard } from "./firebase";
+import { Leaderboard } from "./components/Leaderboard";
 
 
 function App() {
@@ -25,15 +26,15 @@ function App() {
   const [correctChoices, setCorrectChoices] = useState([])
   // below state will conditionally render game-over screen
   const [isGameOver, setIsGameOver] = useState(false)
-  // below state is used to conditionally render submit form when user wants to save scores
-  const [submitButtonClicked, setSubmitButtonClicked] = useState(false)
   // below state holds the input values 
-  const [nameInput, setNameInput] = useState(null);
+  const [nameInput, setNameInput] = useState("Anonymous");
   // below state holds the current leaderborad from the database
   const [leaderboard, setLeaderboard] = useState({
     title: null,
     scores: null,
   });
+  // below state is used to conditionally render leaderboard only when the play game is not active
+  const [showLeaderborad, setShowLeaderboard] = useState(true);
 
   // below effect will load the leaderboard on pageload
   useEffect(() => {
@@ -63,7 +64,9 @@ function App() {
   // below effect will set the gameover status to true once all 5 characters are correctly identified
   useEffect(() => {
     if (correctChoices.length >= 5) {
-      setIsGameOver(true)
+      setIsGameOver(true);
+      setShowLeaderboard(true);
+      setStartGame(false)
     };
   }, [correctChoices])
 
@@ -71,11 +74,7 @@ function App() {
     setUserChoice(e.target.dataset.name);
   }
 
-  const userWantsToSaveToLeaderboard = () => {
-    setSubmitButtonClicked(true);
-  }
-
-  const userClickedNo = () => {
+  const handleCancel = () => {
     // eslint-disable-next-line no-restricted-globals
     location.reload();
   }
@@ -84,47 +83,35 @@ function App() {
     setNameInput(e.target.value);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // submitScoresToLeaderBoard({name: nameInput, time: time.substring(11, 19)}, leaderboard);
+    setNameInput("Anonymous");
+    await submitScoresToLeaderBoard({name: nameInput, time: time.substring(11, 19)}, leaderboard);
     // eslint-disable-next-line no-restricted-globals
     location.reload();
   }
-
-  const startTime = () => setStartGame(true);
+  // this will start the game
+  const startTime = () => {
+    setStartGame(true);
+    setShowLeaderboard(false);
+  };
 
   return (
     <div className="App">
       <header>
         <h1>Where's Waldo?</h1>
-        {!startGame && <button id="start" onClick={startTime}>Start Game!</button>} {/*A conditional reference to make the button disappear*/}
+        {!startGame && !isGameOver && <button id="start" onClick={startTime}>Start Game!</button>} {/*A conditional reference to make the button disappear*/}
       </header>
       {/* Below condition is necessary because the leaderboard is fetched asycnhronously causing to get reference error without this condition */}
-      { leaderboard.title &&
-        <div id="leaderboard">
-          <p>{leaderboard.title}</p>
-          <ol>
-            {/* This is simply rendering a new list item for each score item in leaderboard */}
-            {leaderboard.scores.map((item, index) => {
-              if (index > 10) return null;
-              return (
-                  <li key={index}>
-                    <p>Name: {item.name}</p> 
-                    <p>Time: {item.time}</p>
-                  </li>
-              )
-            })}
-          </ol>
-        </div>
-        }
-      <main>
+      { showLeaderborad && leaderboard.title && <Leaderboard leaderboard={leaderboard} />}
+      <main className={startGame ? 'active' : ''}>
         {/*Below condition basically renders the game screen if gameover state is false and renders gameover screen if it's true */}
         {
         !isGameOver ?
-          <div>
+          <div id="gameplay-page">
             {
               startGame && 
-                <div> 
+                <> 
                   <Timer time={time} setTime={setTime}/>
                   <Waldo 
                   setRange={setRange} 
@@ -133,16 +120,19 @@ function App() {
                   setUserClicked={setUserClicked}
                   correctChoices={correctChoices}
                   />
-                </div>
+                </>
             }
           </div> :
-          <div>
-            <p>Game Over!</p>
+          <div id="gameover-page">
+            <h3>YOU WIN!!!</h3>
             <p>Your Time is: {time.substring(11, 19)}</p>
-            <p>Do you want to submit your time to the leaderboard?</p>
-            <button onClick={userWantsToSaveToLeaderboard}>Yes!!!</button>
-            <button onClick={userClickedNo}>NO!!!</button>
-            {submitButtonClicked && <SubmitScore handleNameInput={handleNameInput} handleSubmit={handleSubmit}/>}
+            <p>Input your name to save your time in the leaderboard!</p>
+            <SubmitScore 
+            nameInput={nameInput} 
+            handleNameInput={handleNameInput} 
+            handleSubmit={handleSubmit}
+            handleCancel={handleCancel}
+            />
           </div>  
         }
       </main>
