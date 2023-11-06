@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { TPlayGameLoaderData } from '../../types';
+import type { TPlayGameLoaderData } from '../../types';
 import GameComponent from '../gameComponent/GameComponent';
 import styles from './PlayGame.module.css';
 

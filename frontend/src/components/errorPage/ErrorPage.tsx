@@ -4,6 +4,7 @@ export default function ErrorPage() {
   const rawError = useRouteError();
   console.error(rawError);
 
+  // extracting the error message
   let error;
   if (rawError instanceof Error) {
     error = rawError.message;

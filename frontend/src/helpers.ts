@@ -1,6 +1,8 @@
 import { TCoordinates } from './types';
 
 export const getDistance = (answerCoordinates: TCoordinates, clickedCoordinates: TCoordinates) => {
+  // According to ChatGPT the distance between two points is caluclated using the formula
+  // "Square root of ((x2 - x1)^2 + (y2 - y1)^2)"
   const x = clickedCoordinates.x - answerCoordinates.x;
   const y = clickedCoordinates.y - answerCoordinates.y;
   return Math.sqrt(x ** 2 + y ** 2);

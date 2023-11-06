@@ -1,23 +1,25 @@
-import { MouseEventHandler, useEffect, useState } from 'react';
-import { TGameImgData, TCoordinates, TGameImgAnswerData } from '../../types';
+import { type MouseEventHandler, useEffect, useState } from 'react';
+import type { TGameComponentProps, TCoordinates, TGameImgAnswerData } from '../../types';
 import { getDistance, getElapsedTimeForDisplay } from '../../helpers';
 import Modal from '../modal/Modal';
 import SubmitScore from '../submitScore/SubmitScore';
 import styles from './GameComponent.module.css';
 
-const GameComponent = ({ gameImg }: { gameImg: TGameImgData }) => {
+const GameComponent = ({ gameImg }: TGameComponentProps) => {
   const [timeElapsed, setTimeElapsed] = useState<number>(0);
   const [coordinates, setCoordinates] = useState<TCoordinates | null>(null);
   const [correctSelections, setCorrectSelections] = useState<TCoordinates[]>([]);
   const [pendingChoices, setPendingChoices] = useState<TGameImgAnswerData[]>(gameImg.answers);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const { id, gameName, answers } = gameImg;
+  // Function to show options and selection when user clicks on a point in image
   const handleClick: MouseEventHandler<HTMLDivElement> = (event) => {
     setCoordinates({
       x: event.nativeEvent.offsetX,
       y: event.nativeEvent.offsetY,
     });
   };
+  // Function to handle user selection from the options
   const handleOptionSelection: MouseEventHandler = (event) => {
     const targetValue = (event.target as HTMLButtonElement).value;
     const userSelection = answers.find((answer) => answer.id === targetValue);
@@ -27,6 +29,7 @@ const GameComponent = ({ gameImg }: { gameImg: TGameImgData }) => {
         y: userSelection.yAxis,
       };
       const distance = getDistance(correctCoordinates, coordinates);
+      // A margin or error of 10 points is provided because it's impossible to be exact.
       if (distance < 10) {
         setCorrectSelections([...correctSelections, coordinates]);
         const newChoices = pendingChoices.filter((item) => item.id !== targetValue);
@@ -102,6 +105,7 @@ const GameComponent = ({ gameImg }: { gameImg: TGameImgData }) => {
   );
 };
 
+// show a circle at the point of click as "selection"
 const Selection = ({ color, x, y }: { color: string; x: number; y: number }) => {
   return (
     <div

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { TModalProps } from '../../types';
+import type { TModalProps } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import styles from './Modal.module.css';
 
@@ -8,6 +8,9 @@ const Modal = ({ shouldOpen, children }: TModalProps) => {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   useEffect(() => {
+    // using an effect to change isOpen state thus
+    // allowing us to use another effect to open/close
+    // the modal using refs
     setIsOpen(shouldOpen);
   }, [shouldOpen]);
   useEffect(() => {

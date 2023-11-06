@@ -21,7 +21,7 @@ const action: ActionFunction = async ({ request, params }) => {
   } catch (error) {
     console.error(error);
     if (error instanceof Error) throw new Error(error.message);
-    else if (typeof error === 'object') throw new Error(JSON.stringify(error));
+    else if (typeof error === 'object' && error !== null) throw new Error(JSON.stringify(error));
     else throw new Error('Something went wrong');
   }
 };

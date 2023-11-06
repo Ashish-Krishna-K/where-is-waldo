@@ -1,5 +1,5 @@
 import { Form, useNavigation } from 'react-router-dom';
-import { TSubmitScoreProps } from '../../types';
+import type { TSubmitScoreProps } from '../../types';
 import styles from './SubmitScore.module.css';
 
 const SubmitScore = ({ completionTime }: TSubmitScoreProps) => {

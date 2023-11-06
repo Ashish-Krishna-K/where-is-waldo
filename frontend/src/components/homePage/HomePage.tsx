@@ -1,7 +1,5 @@
 import { Navigate } from 'react-router-dom';
 
-const HomePage = () => {
-  return <Navigate to={'/play'} />;
-};
+const HomePage = () => <Navigate to={'/play'} />;
 
 export default HomePage;

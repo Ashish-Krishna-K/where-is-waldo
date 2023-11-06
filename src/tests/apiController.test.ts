@@ -5,6 +5,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import GameImage from '../models/gameImg';
 import Leaderboard from '../models/leaderboard';
 
+// Create fake img data for testing
 const getTestImgData = () => {
   const arr = [];
   for (let i = 0; i < 3; i++) {
@@ -24,6 +25,7 @@ const getTestImgData = () => {
   return arr;
 };
 
+// create fake leaderboard data for testing
 const getTestLeaderboard = () => {
   const arr = [];
   for (let i = 0; i < 3; i++) {

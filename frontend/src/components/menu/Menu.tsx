@@ -1,6 +1,6 @@
 import { Link, useNavigation } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom';
-import { TGameMenuLoaderData } from '../../types';
+import type { TGameMenuLoaderData } from '../../types';
 import Spinner from '../spinner/Spinner';
 import styles from './Menu.module.css';
 

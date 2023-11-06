@@ -45,3 +45,5 @@ export type TLeaderboardLoaderData = {
   gameName: string;
   leaderboard: TLeaderboardData[];
 };
+
+export type TGameComponentProps = { gameImg: TGameImgData };

@@ -13,6 +13,7 @@ const LeaderboardSchema = new Schema(
   },
 );
 
+// This interface is required to provide type annotations while populating.
 export interface ILeaderboardSchema extends InferSchemaType<typeof LeaderboardSchema> {}
 
 const Leaderboard = mongoose.model('Leaderboard', LeaderboardSchema);

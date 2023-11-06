@@ -1,5 +1,5 @@
 import { useLoaderData, useNavigation, useParams } from 'react-router-dom';
-import { TLeaderboardLoaderData } from '../../types';
+import type { TLeaderboardLoaderData } from '../../types';
 import { getElapsedTimeForDisplay } from '../../helpers';
 import Spinner from '../spinner/Spinner';
 import styles from './Leaderboard.module.css';
