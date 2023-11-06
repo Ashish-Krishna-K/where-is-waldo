@@ -103,7 +103,7 @@ describe('tests the apiRoutes', () => {
   });
   test('tests POST api/:gameId/leaderboard', async () => {
     const allImgs = await request(app).get('/api/');
-    const res = await request(app).post(`/api/${allImgs.body.allImgsId[0].id}/leaderboard`).send({ time: "0" });
+    const res = await request(app).post(`/api/${allImgs.body.allImgsId[0].id}/leaderboard`).send({ time: '0' });
     expect(res.statusCode).toBe(201);
     const leaderboard = await request(app).get(`/api/${allImgs.body.allImgsId[0].id}/leaderboard`);
     expect(leaderboard.body.leaderboard.length).toBe(4);
