@@ -1,0 +1,21 @@
+.modal {
+  min-height: 30%;
+  display: grid;
+  padding: 0;
+  background-color: var(--fg);
+  color: var(--bg);
+}
+
+.modal input {
+  border-radius: 5px;
+}
+
+.modal button {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-size: 1.3rem;
+}
+
+.modal::backdrop {
+  background-color: rgb(0, 0, 0, 0.7);
+}

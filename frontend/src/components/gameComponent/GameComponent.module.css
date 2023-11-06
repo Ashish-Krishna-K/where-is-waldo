@@ -1,0 +1,125 @@
+.container {
+  display: grid;
+  overflow: auto;
+}
+
+.gameHeader {
+  grid-column: span 2;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2vw;
+  align-items: center;
+}
+
+.gameHeader > p {
+  font-size: 1.5rem;
+}
+
+.playArea {
+  overflow: auto;
+  margin: auto;
+}
+
+.imgContainer {
+  width: 800px;
+  height: 800px;
+  position: relative;
+}
+
+.imgContainer > img {
+  display: block;
+  width: 100%;
+}
+
+.answers > ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.answers li {
+  text-align: center;
+  text-transform: capitalize;
+  margin: 3vh 0;
+}
+
+.answers img {
+  width: 100px;
+  height: 100px;
+}
+
+.choices {
+  position: absolute;
+}
+
+.choices button {
+  width: 100%;
+}
+
+.selection {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0.5;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .answers > ul {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .answers li {
+    margin-top: 3vh;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 800px) {
+  .answers img {
+    width: 80px;
+    height: 80px;
+  }
+  .imgContainer {
+    width: 600px;
+    height: 600px;
+  }
+}
+
+@media (max-width: 600px) {
+  .answers img {
+    width: 70px;
+    height: 70px;
+  }
+  .imgContainer {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 400px) {
+  .answers img {
+    width: 60px;
+    height: 60px;
+  }
+  .imgContainer {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 300px) {
+  .answers img {
+    width: 50px;
+    height: 50px;
+  }
+  .imgContainer {
+    min-width: 250px;
+    min-height: 250px;
+  }
+}

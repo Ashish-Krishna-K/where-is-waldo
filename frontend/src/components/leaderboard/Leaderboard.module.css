@@ -1,0 +1,53 @@
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leaderboard h2 {
+  text-align: center;
+}
+
+.leaderboard img {
+  width: 200px;
+  margin: 4vh 0;
+}
+
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.table {
+  background-color: var(--fg);
+  color: var(--bg);
+}
+
+.table,
+.table th,
+.table td {
+  border: 1px solid var(--bg);
+  border-collapse: collapse;
+  padding: 0.1vmin;
+}
+
+.table th,
+.table td {
+  padding: 1vmin;
+  text-align: center;
+}
+
+.table thead {
+  font-size: 1.3rem;
+}
+
+.table thead th {
+  border-bottom-width: 4px;
+}
+
+@media (max-width: 350px) {
+  .table thead {
+    font-size: 1rem;
+  }
+}

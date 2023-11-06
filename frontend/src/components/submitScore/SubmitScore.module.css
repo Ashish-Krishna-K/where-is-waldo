@@ -1,0 +1,12 @@
+.form {
+  padding: 2vmax;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.form>button {
+  align-self: center;
+  padding: 1vh 5vw;
+  border-radius: 5px;
+}

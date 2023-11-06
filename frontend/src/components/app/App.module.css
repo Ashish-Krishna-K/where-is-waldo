@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.navbar > ul {
+  display: flex;
+  gap: 3vw;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.footer {
+  text-align: center;
+}
+
+@media (max-width: 350px) {
+  .header {
+    flex-direction: column;
+  }
+  .navbar > ul {
+    justify-content: space-around;
+  }
+}

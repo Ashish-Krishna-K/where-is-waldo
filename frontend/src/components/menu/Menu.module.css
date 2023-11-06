@@ -1,0 +1,21 @@
+.menu {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10vh;
+}
+
+.menu a {
+  text-align: center;
+}
+
+.menuImg {
+  display: block;
+  width: 200px;
+  margin: auto;
+}
+
+@media (max-width: 800px) {
+  .menu {
+    flex-direction: column;
+  }
+}

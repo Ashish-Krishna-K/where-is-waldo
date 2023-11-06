@@ -1,0 +1,29 @@
+/* The whole component */
+.loadingContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The spinner itself */
+.loadingContainer::after {
+  content: '';
+  width: 75px;
+  height: 75px;
+  border: 15px solid rgb(0, 0, 0, 0.5);
+  border-top-color: var(--fg);
+  border-radius: 50%;
+  animation: loading 0.75s ease infinite;
+}
+
+/* The rotating animation */
+@keyframes loading {
+  from {
+    rotate: 0turn;
+  }
+  to {
+    rotate: 1turn;
+  }
+}
